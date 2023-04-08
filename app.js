@@ -2,6 +2,9 @@
 
 window.addEventListener("load", initApp);
 
+const notAllowed = ["null", "undifined"];
+//to string
+
 async function initApp() {
   console.log("initApp");
 
@@ -120,7 +123,10 @@ function showCharacter(character) {
 // Checks if the value is null or not, returns different strings based on the result
 function catchPhraseContent(character) {
   let output = "";
-  if (character.catchPhrase != "null") {
+  //Lav catchphrase til en string.
+  const phrase = `${character.catchPhrase}`;
+  console.log(phrase);
+  if (phrase != "null") {
     output = `Catchphrase:  ${character.catchPhrase}`;
   } else {
     output = `${character.name} has no catch phrase`;

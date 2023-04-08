@@ -162,7 +162,7 @@ dialog[data-theme="ageSenior"] {
   background-image: linear-gradient(130deg, purple, orange);
 }
 
-/* h2::first-letter {
+h2::first-letter {
   font-size: 30px;
-  color: black;
-} */
+  color: orange;
+}
