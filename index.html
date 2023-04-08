@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>South Park</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Characters of South Park</h1>
+    </header>
+
+    <main>
+      <article id="characters" class="grid-container"></article>
+
+      <section id="dialog">
+        <dialog id="dialogCharacter">
+          <img id="dialogImage" />
+          <h2 id="dialogName">name</h2>
+          <h3 id="dialogNickname">${character["nickname"]}</h3>
+          <p id="dialogOccupation">${character["occupation"]}</p>
+          <p id="dialogGender">Gender</p>
+          <p id="dialogPhrase">catcphrase</p>
+          <p id="dialogAge">${character["age"]}</p>
+          <p id="dialogReligion">${character["religion"]}</p>
+          <p id="dialogHair">${character["hariColor"]}</p>
+          <p id="dialogGrade">${character["schoolGrade"]}</p>
+          <p id="dialogEpisodes">${character["episodes"]}</p>
+          <p id="dialogApperances">${character["apperances"]}</p>
+          <p id="dialogFirstApperance">${character["firstApperance"]}</p>
+          <form method="dialog">
+            <button>Close</button>
+          </form>
+        </dialog>
+      </section>
+    </main>
+    <footer>luma0001</footer>
+    <script src="app.js"></script>
+  </body>
+</html>
