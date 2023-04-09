@@ -166,3 +166,9 @@ h2::first-letter {
   font-size: 30px;
   color: orange;
 }
+
+/* TABLE VIEW */
+
+.hidden {
+  opacity: 0;
+}

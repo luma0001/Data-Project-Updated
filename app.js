@@ -3,10 +3,13 @@
 window.addEventListener("load", initApp);
 
 const notAllowed = ["null", "undifined"];
-//to string
 
 async function initApp() {
   console.log("initApp");
+
+  //Buttons that switch between grid and table
+  // document.querySelector("#tableView").addEventListener("click",runCharactersTable);
+  // document.querySelector("#tableView").addEventListener("click",runCharactersGrid);
 
   const characters = await getJson();
 
@@ -137,3 +140,21 @@ function catchPhraseContent(character) {
 // character.catchPhrase === null ? console.log("false") : console.log("true");
 
 // function test();
+
+function newTableElement() {
+  const newHTML =
+    /*html*/
+    `<tr>
+  <td><img src=${character["image"]}/></td>   
+  <td>${character["name"]}</td>
+  <td>Gender: ${character["gender"]}</td>
+  <td>Nick Name: ${character["nickname"]}</td>
+  <td>${phrase}</td>
+  <td>Hair colour: ${character["hairColor"]}</td>
+  <td>${character["name"]} is played by ${character["voicedBy"]}</td>
+</tr>`;
+
+  document
+    .querySelector("#characterInfo")
+    .insertAdjacentHTML("beforeend", newHTML);
+}
