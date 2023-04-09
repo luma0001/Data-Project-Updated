@@ -10,25 +10,25 @@
   <body>
     <header>
       <h1>Characters of South Park</h1>
-      <button id="viewTable">Tabe View</button>
-      <button id="viewGrid">Grid View</button>
+      <button id="viewBtn">Grid View</button>
     </header>
 
     <main>
       <section id="characterTable" class="hidden">
         <!-- Skal jeg ungå <tr><tr><td></td></tr></tr>? -->
         <table>
-          <tr>
-            S
-            <th>Image</th>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>Nick name</th>
-            <th>catcphrase</th>
-            <th>Hair Color</th>
-            <th>Played by</th>
-          </tr>
-          <tr id="characterInfo"></tr>
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Gender</th>
+              <th>Nick name</th>
+              <th>catcphrase</th>
+              <th>Hair Color</th>
+              <th>Played by</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
         </table>
       </section>
 

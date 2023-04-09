@@ -3,13 +3,37 @@
 window.addEventListener("load", initApp);
 
 const notAllowed = ["null", "undifined"];
+let viewGrid = false;
 
-async function initApp() {
+function initApp() {
   console.log("initApp");
 
   //Buttons that switch between grid and table
   // document.querySelector("#tableView").addEventListener("click",runCharactersTable);
-  // document.querySelector("#tableView").addEventListener("click",runCharactersGrid);
+  document
+    .querySelector("#viewBtn")
+    .addEventListener("click", runCharactersGrid);
+
+  runCharactersGrid();
+}
+
+// VI SKAL RESETTE DET HELE...
+function resetButton() {
+  if ((viewGrid = false)) {
+    viewGrid = true;
+    document.querySelector("#viewBtn").textContent = "show Grid";
+  } else if ((viewGrid = true)) {
+    viewGrid = false;
+    document.querySelector("#viewBtn").textContent = "show Table";
+  }
+}
+
+// document
+//   .querySelector("#viewBtn")
+//   .removeEventListener("click", runCharactersGrid);
+
+async function runCharactersGrid() {
+  resetButton();
 
   const characters = await getJson();
 
@@ -59,8 +83,15 @@ function showCharacter(character) {
   const ageColor = checkAge(character);
   const phrase = catchPhraseContent(character);
 
-  console.log(character["image"]);
-  const myHTML = /*html*/ `<article class=${ageColor}>
+  // html = this or that...´
+  let myHTML;
+  let charaterTable = document.querySelector("#characterTable");
+
+  if (viewGrid == true) {
+    //Hides the HTML table
+    charaterTable.classList.add("hidden");
+
+    myHTML = /*html*/ `<article class=${ageColor}>
   <img src=${character["image"]}>
   <h2>${character["name"]}</h2>
   <p>Gender: ${character["gender"]}</p>
@@ -70,13 +101,40 @@ function showCharacter(character) {
   <p>${character["name"]} is played by ${character["voicedBy"]}</p>
   </article>`;
 
-  document.querySelector("#characters").insertAdjacentHTML("beforeend", myHTML);
+    document
+      .querySelector("#characters")
+      .insertAdjacentHTML("beforeend", myHTML);
+    document
+      .querySelector("#characters article:last-child")
+      .addEventListener("click", characterClicked);
+  } else if (viewGrid == false) {
+    //Shows the HTML table
+    charaterTable.classList.remove("hidden");
+    myHTML =
+      /*html*/
+      `<tr>
+  <td class = image_style ><img src=${character["image"]}/></td>   
+  <td>${character["name"]}</td>
+  <td>Gender: ${character["gender"]}</td>
+  <td>Nick Name: ${character["nickname"]}</td>
+  <td>${phrase}</td>
+  <td>Hair colour: ${character["hairColor"]}</td>
+  <td>${character["name"]} is played by ${character["voicedBy"]}</td>
+</tr>`;
+
+    document
+      .querySelector("#characterTable")
+      .querySelector("tbody")
+      .insertAdjacentHTML("beforeend", myHTML);
+
+    document
+      .querySelector("#characterTable tbody tr:last-child")
+      .addEventListener("click", characterClicked);
+  }
 
   // NB: Man kan også bruge et Call Back istedet for Modal Function...
-  document
-    .querySelector("#characters article:last-child")
-    .addEventListener("click", characterClicked);
 
+  // NESTED FUNCTION STARTS HERE!
   // Connects the character info to the DIALOG HTML elements
   function characterClicked() {
     console.log("Clicked");
@@ -123,6 +181,7 @@ function showCharacter(character) {
     document.querySelector("#dialogCharacter").showModal();
   }
 }
+
 // Checks if the value is null or not, returns different strings based on the result
 function catchPhraseContent(character) {
   let output = "";
@@ -140,21 +199,3 @@ function catchPhraseContent(character) {
 // character.catchPhrase === null ? console.log("false") : console.log("true");
 
 // function test();
-
-function newTableElement() {
-  const newHTML =
-    /*html*/
-    `<tr>
-  <td><img src=${character["image"]}/></td>   
-  <td>${character["name"]}</td>
-  <td>Gender: ${character["gender"]}</td>
-  <td>Nick Name: ${character["nickname"]}</td>
-  <td>${phrase}</td>
-  <td>Hair colour: ${character["hairColor"]}</td>
-  <td>${character["name"]} is played by ${character["voicedBy"]}</td>
-</tr>`;
-
-  document
-    .querySelector("#characterInfo")
-    .insertAdjacentHTML("beforeend", newHTML);
-}
