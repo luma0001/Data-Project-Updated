@@ -104,10 +104,42 @@ button {
 /************ Table Styling *********** */
 
 #characterTable {
-  padding: 20px;
-  padding-top: 140px;
+  padding: 10px;
+  padding-top: 50px;
   background-color: white;
   padding-bottom: 50px;
+}
+
+table {
+  text-align: center;
+  overflow: hidden;
+}
+
+table img {
+  height: 100px;
+  padding: 10px;
+}
+
+th {
+  background-color: orange;
+}
+
+tr:nth-child(even) {
+  background-color: darkgray;
+}
+
+tr:nth-child(odd) {
+  background-color: salmon;
+}
+
+th,
+td {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+tbody tr:hover {
+  background-color: orange;
 }
 
 /*** Dialog Styling ****/

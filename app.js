@@ -122,11 +122,11 @@ function showCharacter(character) {
     `<tr>
   <td class = image_style ><img src=${character["image"]}/></td>   
   <td>${character["name"]}</td>
-  <td>Gender: ${character["gender"]}</td>
-  <td>Nick Name: ${character["nickname"]}</td>
+  <td>${character["gender"]}</td>
+  <td>${character["nickname"]}</td>
   <td>${phrase}</td>
-  <td>Hair colour: ${character["hairColor"]}</td>
-  <td>${character["name"]} is played by ${character["voicedBy"]}</td>
+  <td>${character["hairColor"]}</td>
+  <td>${character["voicedBy"]}</td>
 </tr>`;
 
   document
