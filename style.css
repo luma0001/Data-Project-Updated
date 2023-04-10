@@ -1,3 +1,5 @@
+/**** General Styling ****/
+
 header {
   background-color: coral;
 }
@@ -37,7 +39,7 @@ img {
   height: auto;
 }
 
-/* grid */
+/*** grid ****/
 .grid-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -85,6 +87,37 @@ img {
   margin: 0.2em 0;
 }
 
+button {
+  text-align: center;
+  cursor: pointer;
+  font-size: 1em;
+  color: whitesmoke;
+  border: none;
+  border-radius: 0;
+  background-color: orange;
+  padding: 0.5em 1em;
+  width: 100%;
+  max-width: 400px;
+  text-transform: uppercase;
+}
+
+/************ Table Styling *********** */
+
+#characterTable {
+  padding: 20px;
+  padding-top: 140px;
+  background-color: white;
+  padding-bottom: 50px;
+}
+
+/*** Dialog Styling ****/
+dialog {
+  border: none;
+  border-radius: 0;
+  background-color: whitesmoke;
+  color: black;
+}
+
 dialog > img {
   width: 100%;
   height: 350px;
@@ -101,49 +134,9 @@ form {
   text-align: center;
 }
 
-button {
-  text-align: center;
-  cursor: pointer;
-  font-size: 1em;
-  color: whitesmoke;
-  border: none;
-  border-radius: 0;
-  background-color: orange;
-  padding: 0.5em 1em;
-  width: 100%;
-  max-width: 400px;
-  text-transform: uppercase;
-}
-
-dialog {
-  border: none;
-  border-radius: 0;
-  background-color: whitesmoke;
-  color: black;
-}
-
 button:hover {
   color: black;
   background-color: white;
-}
-
-.ageChild {
-  /* background-color: rgb(178, 229, 243); */
-  background-image: linear-gradient(130deg, green, orange);
-}
-
-.ageYoung {
-  background-color: rgb(183, 211, 253);
-}
-
-.ageAdult {
-  /* background-color: rgb(126, 183, 231); */
-  background-image: linear-gradient(130deg, rgb(0, 81, 128), orange);
-}
-
-.ageSenior {
-  /* background-color: rgb(67, 92, 146); */
-  background-image: linear-gradient(130deg, purple, orange);
 }
 
 dialog[data-theme="ageChild"] {
@@ -168,7 +161,26 @@ h2::first-letter {
 }
 
 /* TABLE VIEW */
+.ageChild {
+  /* background-color: rgb(178, 229, 243); */
+  background-image: linear-gradient(130deg, green, orange);
+}
+
+.ageYoung {
+  background-color: rgb(183, 211, 253);
+}
+
+.ageAdult {
+  /* background-color: rgb(126, 183, 231); */
+  background-image: linear-gradient(130deg, rgb(0, 81, 128), orange);
+}
+
+.ageSenior {
+  /* background-color: rgb(67, 92, 146); */
+  background-image: linear-gradient(130deg, purple, orange);
+}
 
 .hidden {
-  opacity: 0;
+  display: none;
+  /*  Note to self. opacity: 0 was the wrong solution compared to display: none */
 }

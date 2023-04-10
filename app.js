@@ -1,48 +1,58 @@
 "use strict";
 
+// Problemer:
+// Vi skal rodde med noget z-index så de 2-view modes ikke ligger i forlængelse af hinanden.
+// Vi skal også sørger for at man ikke kan klikke på et "view" som ikke vises.
+
 window.addEventListener("load", initApp);
 
-const notAllowed = ["null", "undifined"];
 let viewGrid = false;
 
-function initApp() {
-  console.log("initApp");
+async function initApp() {
+  console.log(`ViewGrid:${viewGrid}`);
+
+  const characters = await getJson();
+  const sorted = sortCharacters(characters);
 
   //Buttons that switch between grid and table
-  // document.querySelector("#tableView").addEventListener("click",runCharactersTable);
-  document
-    .querySelector("#viewBtn")
-    .addEventListener("click", runCharactersGrid);
+  // document.qu erySelector("#tableView").addEventListener("click",runCharactersTable);
+  document.querySelector("#viewBtn").addEventListener("click", resetButton);
 
-  runCharactersGrid();
+  runShowCharacter(characters);
 }
 
 // VI SKAL RESETTE DET HELE...
 function resetButton() {
-  if ((viewGrid = false)) {
+  if (viewGrid == false) {
     viewGrid = true;
     document.querySelector("#viewBtn").textContent = "show Grid";
-  } else if ((viewGrid = true)) {
+
+    characterTable.classList.remove("hidden");
+    characterGrid.classList.add("hidden");
+  } else if (viewGrid == true) {
     viewGrid = false;
     document.querySelector("#viewBtn").textContent = "show Table";
+
+    //Hides the HTML table
+    characterTable.classList.add("hidden");
+    characterGrid.classList.remove("hidden");
   }
 }
 
-// document
-//   .querySelector("#viewBtn")
-//   .removeEventListener("click", runCharactersGrid);
+function updateView() {
+  //Prevent btn presses.
+  document.querySelector("#viewBtn").removeEventListener("click", resetButton);
+  //Runs initApp - showing new view
+  initApp();
+}
 
-async function runCharactersGrid() {
-  resetButton();
-
-  const characters = await getJson();
-
+function sortCharacters(characters) {
   // Soultuion found at https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/
   // Sorts the array of objects by character.apperance from hihgest to lowest
   const sorted = characters.sort((a, b) =>
     a.appearances > b.appearances ? -1 : 1
   );
-  runShowCharacter(sorted);
+  return sorted;
 }
 
 // Fetches the json objects
@@ -57,6 +67,7 @@ async function getJson() {
 
 //Loops every object in the json array and calls showCharacter.
 function runShowCharacter(characters) {
+  console.log("runShowCharaceres");
   for (let index = 0; index < characters.length; index++) {
     const person = characters[index];
     showCharacter(person);
@@ -84,14 +95,10 @@ function showCharacter(character) {
   const phrase = catchPhraseContent(character);
 
   // html = this or that...´
-  let myHTML;
-  let charaterTable = document.querySelector("#characterTable");
+  const charaterTable = document.querySelector("#characterTable");
+  const characterGrid = document.querySelector("#characterGrid");
 
-  if (viewGrid == true) {
-    //Hides the HTML table
-    charaterTable.classList.add("hidden");
-
-    myHTML = /*html*/ `<article class=${ageColor}>
+  const gridHTML = /*html*/ `<article class=${ageColor} gird-item>
   <img src=${character["image"]}>
   <h2>${character["name"]}</h2>
   <p>Gender: ${character["gender"]}</p>
@@ -101,18 +108,18 @@ function showCharacter(character) {
   <p>${character["name"]} is played by ${character["voicedBy"]}</p>
   </article>`;
 
-    document
-      .querySelector("#characters")
-      .insertAdjacentHTML("beforeend", myHTML);
-    document
-      .querySelector("#characters article:last-child")
-      .addEventListener("click", characterClicked);
-  } else if (viewGrid == false) {
-    //Shows the HTML table
-    charaterTable.classList.remove("hidden");
-    myHTML =
-      /*html*/
-      `<tr>
+  document
+    .querySelector("#characterGrid")
+    .insertAdjacentHTML("beforeend", gridHTML);
+  document
+    .querySelector("#characterGrid article:last-child")
+    .addEventListener("click", characterClicked);
+
+  //Shows the HTML table
+
+  const tableHTML =
+    /*html*/
+    `<tr>
   <td class = image_style ><img src=${character["image"]}/></td>   
   <td>${character["name"]}</td>
   <td>Gender: ${character["gender"]}</td>
@@ -122,15 +129,14 @@ function showCharacter(character) {
   <td>${character["name"]} is played by ${character["voicedBy"]}</td>
 </tr>`;
 
-    document
-      .querySelector("#characterTable")
-      .querySelector("tbody")
-      .insertAdjacentHTML("beforeend", myHTML);
+  document
+    .querySelector("#characterTable")
+    .querySelector("tbody")
+    .insertAdjacentHTML("beforeend", tableHTML);
 
-    document
-      .querySelector("#characterTable tbody tr:last-child")
-      .addEventListener("click", characterClicked);
-  }
+  document
+    .querySelector("#characterTable tbody tr:last-child")
+    .addEventListener("click", characterClicked);
 
   // NB: Man kan også bruge et Call Back istedet for Modal Function...
 
